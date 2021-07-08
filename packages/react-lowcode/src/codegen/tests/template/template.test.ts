@@ -1,3 +1,5 @@
+import { generateCode } from "ts-factory-code-generator-generator";
+import { getListPageComponentName } from "../../generation/entity/helper";
 import TemplateResolver from "../../generation/generators/template/template-resolver";
 import { parseGraphqlTypes, sourceFileEntity } from "../helper";
 import { graphqlGenTs1 } from "../typeAlias.example";
@@ -32,11 +34,15 @@ export default App;
               `;
 
         const generatedCode = templateResolver.generateListPage(template);
+        console.log(`generated list page: ${generateCode}`)
 
-        expect(generatedCode).toContain('import { CustomerTable } from "./CustomerTable";');
-        expect(generatedCode).toContain('<CustomerTable customers={data?.customers}/>');
+        expect(generatedCode).toContain('import { CustomerList } from "./CustomerList";');
+        expect(generatedCode).toContain('<CustomerList customers={data?.customers}/>');
+        expect(generatedCode).toContain(`function ${getListPageComponentName(testEntity!)}`);
         
         expect(generatedCode).not.toContain("import ListPlaceholder from './ListPlaceholder'");
         expect(generatedCode).not.toContain("<ListPlaceholder customers={data?.customers} />");
+        expect(generatedCode).not.toContain("function App()");
+
     });
 });

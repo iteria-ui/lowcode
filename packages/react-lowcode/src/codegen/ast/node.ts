@@ -21,3 +21,11 @@ export const isOpeningOrSelfClosingElementWithName = (node: ts.Node, name: strin
         }
     }
 }
+
+export const isFunctionDeclarationWithName = (node: ts.Node, name: string): boolean | undefined => {
+    if (ts.isFunctionDeclaration(node)) {
+        if (node.name?.escapedText === name) {
+            return true;
+        }
+    }
+}

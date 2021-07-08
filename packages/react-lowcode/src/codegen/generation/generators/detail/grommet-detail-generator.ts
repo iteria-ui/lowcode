@@ -5,7 +5,7 @@ import {
 import { DetailComponentDefinitionBase } from "../../../definition/detail-definition-core";
 import { Formatter } from "../../../definition/context-types";
 import { Entity, getProperties, Property } from "../../entity";
-import { createImportDeclaration, createNameSpaceImport, uniqueImports } from "../../../ast/imports";
+import { createNamedImportDeclaration, createNameSpaceImport, uniqueImports } from "../../../ast/imports";
 import { GeneratorHelper } from "../helper";
 import ReactIntlFormatter from "../../react-components/react-intl/intl-formatter";
 import { GrommetDetailComponents } from "../../../definition/grommet/detail";
@@ -46,21 +46,21 @@ export default class GrommetDetailGenerator
       createNameSpaceImport("React", "react")
     );
     uniqueFileImports.push(
-      createImportDeclaration(
+      createNamedImportDeclaration(
         "TextInput",
         "grommet"
       )
     );
     uniqueFileImports.push(
-      createImportDeclaration("useFormik", "formik")
+      createNamedImportDeclaration("useFormik", "formik")
     );
 
     uniqueFileImports.push(
-      createImportDeclaration("useIntl", "react-intl")
+      createNamedImportDeclaration("useIntl", "react-intl")
     );
 
     uniqueFileImports.push(
-      createImportDeclaration("Customer", "./Customer")
+      createNamedImportDeclaration("Customer", "./Customer")
     );
 
     return { functionDeclaration: functionalComponent, imports: uniqueFileImports };

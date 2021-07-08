@@ -2,7 +2,7 @@ import ts, { factory } from "typescript";
 import { SourceLineCol } from "../ast";
 import { HookImport } from "../ast/hooks";
 import { TagImport } from "../ast/tags";
-import { UiFramework } from "./definition/context-types";
+import { TableType, UiFramework } from "./definition/context-types";
 
 export interface CodegenOptions {
     // whitelisted entity names
@@ -10,7 +10,9 @@ export interface CodegenOptions {
     //template for generating list page
     pageListTemplate: string,
     // default is MaterialUI
-    uiFramework?: UiFramework
+    uiFramework?: UiFramework,
+    //default is basic table
+    tableType?: TableType
 }
 
 export interface InsertOptions {

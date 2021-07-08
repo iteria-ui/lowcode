@@ -1,5 +1,5 @@
 import ts, { factory } from "typescript"
-import { createImportDeclaration } from "../../../ast/imports";
+import { createNamedImportDeclaration } from "../../../ast/imports";
 import { defineComponent, createJsxSelfClosingElement, Component } from '../react-component-helper'
 
 export enum IntlFormatingTags {
@@ -131,7 +131,7 @@ export default class ReactIntlTag {
     }
 
     private prepareImport(formattingTag: IntlFormatingTags) {
-        let declaration = createImportDeclaration(formattingTag.toString(), 'react-intl')
+        let declaration = createNamedImportDeclaration(formattingTag.toString(), 'react-intl')
         this._imports.push(declaration)
     }
 }

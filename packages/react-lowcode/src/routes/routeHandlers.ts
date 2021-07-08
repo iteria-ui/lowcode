@@ -1,5 +1,5 @@
 import ts from "typescript"
-import { addElementsToAST } from "../ast/transformer"
+import { addJsxElementsToAST } from "../ast/transformer"
 import {
   createSelfClosingJsxRouteElement,
   createOpeningAndClosingJsxRouteElement,
@@ -25,11 +25,11 @@ export const cloneRouteElements = (
 ) => {
   if (ts.isJsxSelfClosingElement(node)) {
     const newSelfClosingNode = createSelfClosingJsxRouteElement(newPageName)
-    return addElementsToAST(ast, start, [newSelfClosingNode])
+    return addJsxElementsToAST(ast, start, [newSelfClosingNode])
   } else {
     const newOpeningAndClosingElements = createOpeningAndClosingJsxRouteElement(
       newPageName
     )
-    return addElementsToAST(ast, start, [...newOpeningAndClosingElements])
+    return addJsxElementsToAST(ast, start, [...newOpeningAndClosingElements])
   }
 }

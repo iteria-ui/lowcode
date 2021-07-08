@@ -1,5 +1,5 @@
 import ts from "typescript";
-import { createImportDeclaration, uniqueImports } from "../../ast/imports";
+import { createNamedImportDeclaration, uniqueImports } from "../../ast/imports";
 import { AppContext } from "./app-context";
 import { InjectionContext } from "./injection-context";
 
@@ -22,7 +22,7 @@ export class PageContext{
     }
 
     useImport(identifier: string, pck: string){
-        this._imports.push(createImportDeclaration(identifier, pck))
+        this._imports.push(createNamedImportDeclaration(identifier, pck))
     }
 
     public get filePath() : string {

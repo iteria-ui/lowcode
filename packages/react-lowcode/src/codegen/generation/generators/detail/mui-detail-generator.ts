@@ -8,7 +8,7 @@ import { MuiDetailComponents } from "../../../definition/material-ui/detail";
 import { Entity, getProperties, Property } from "../../entity";
 import { getPropertyType, PropertyType } from "../../graphql/typeAlias";
 import {
-  createImportDeclaration,
+  createNamedImportDeclaration,
   createNameSpaceImport,
   uniqueImports,
 } from "../../../ast/imports";
@@ -363,13 +363,13 @@ export default class MuiDetailGenerator implements DetailGenerator {
       var uniqueFileImports = uniqueImports(this._imports);
       uniqueFileImports.push(createNameSpaceImport("React", "react"));
       uniqueFileImports.push(
-        createImportDeclaration(
+        createNamedImportDeclaration(
           "TextField, Avatar, Card, CardHeader, CardContent, Grid",
           "@material-ui/core"
         )
       );
-      uniqueFileImports.push(createImportDeclaration("useFormik", "formik"));
-      uniqueFileImports.push(createImportDeclaration("Customer", "./Customer"));
+      uniqueFileImports.push(createNamedImportDeclaration("useFormik", "formik"));
+      uniqueFileImports.push(createNamedImportDeclaration("Customer", "./Customer"));
 
       return {
         functionDeclaration: functionalComponent,

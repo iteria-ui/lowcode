@@ -1,6 +1,6 @@
 import ts, { factory, textChangeRangeIsUnchanged } from "typescript"
 import { defineHook } from '../../../ast/hooks'
-import { createImportDeclaration } from "../../../ast/imports";
+import { createNamedImportDeclaration } from "../../../ast/imports";
 import { createVariableStatement } from "../../../ast/variables";
 
 
@@ -82,7 +82,7 @@ export default class ReactIntlImperative {
     }
 
     private prepareImport(methodName: IntlFormatingImperativeMethods | string) {
-        let declaration = createImportDeclaration(methodName.toString(), 'react-intl')
+        let declaration = createNamedImportDeclaration(methodName.toString(), 'react-intl')
         this._imports.push(declaration)
     }
 }

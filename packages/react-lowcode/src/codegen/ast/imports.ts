@@ -1,6 +1,6 @@
 import ts, {factory} from "typescript"
 
-export function createImportDeclaration(importSpecifier: string, module:string): ts.ImportDeclaration {
+export function createNamedImportDeclaration(importSpecifier: string, module:string): ts.ImportDeclaration {
     return factory.createImportDeclaration(
         undefined,
         undefined,
@@ -18,6 +18,19 @@ export function createImportDeclaration(importSpecifier: string, module:string):
       )
 }
 
+export function createImportDeclaration(importSpecifier: string, module:string): ts.ImportDeclaration {
+  return factory.createImportDeclaration(
+      undefined,
+      undefined,
+      factory.createImportClause(
+        false,
+        factory.createIdentifier(importSpecifier),
+        undefined
+      ),
+      factory.createStringLiteral(module)
+    )
+}
+
 export function createNameSpaceImport(namespace: string, module: string): ts.ImportDeclaration {
   return factory.createImportDeclaration(
     undefined,
@@ -29,6 +42,15 @@ export function createNameSpaceImport(namespace: string, module: string): ts.Imp
     ),
     factory.createStringLiteral(module)
   )
+}
+
+export function existsImportWithNamespace(node: ts.Node, namespace: string){
+    let isImportWithName = false
+    if(ts.isImportDeclaration(node)){
+        isImportWithName = node.importClause?.name?.escapedText === namespace
+    }
+
+    return isImportWithName
 }
 
 //TODO: improve this to be able also process namespace imports

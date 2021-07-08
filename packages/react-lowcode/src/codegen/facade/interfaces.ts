@@ -12,7 +12,14 @@ export interface FacadeDeleteOptions {
 
 export interface RouteOptions {
     routeFilePath: string
-    entityName: string,
+    componentRouteUri: string,
     componentName: string,
-    componentPath: string
+    componentFilePath: string
+}
+
+export interface MenuItemOptions {
+    menuDefinitionFilePath: string,
+    itemTitle: string,
+    itemUri: string,
+    itemIcon: string
 }

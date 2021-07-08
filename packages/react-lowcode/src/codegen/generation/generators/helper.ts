@@ -7,7 +7,7 @@ import { Entity, Property } from "../entity"
 import { Component } from "../react-components/react-component-helper"
 import ReactIntlFormatter from "../react-components/react-intl/intl-formatter"
 import { identifier } from "../../ast/identifier"
-import { createImportDeclaration, createNameSpaceImport } from "../../ast/imports"
+import { createNamedImportDeclaration, createNameSpaceImport } from "../../ast/imports"
 import { bindingParameter } from "../../ast/parameters"
 import { jsxText, stringLiteral } from "../../ast/text"
 
@@ -27,12 +27,12 @@ export class GeneratorHelper {
     }
 
     addImportDeclaration(specifier: string, module: string, isNameSpaceImport: boolean = false): ts.ImportDeclaration{
-        let importDeclaration = createImportDeclaration(specifier, module)
+        let importDeclaration = createNamedImportDeclaration(specifier, module)
     
         if(isNameSpaceImport){
           importDeclaration = createNameSpaceImport(specifier, module)
         }else{
-          importDeclaration = createImportDeclaration(specifier, module)
+          importDeclaration = createNamedImportDeclaration(specifier, module)
         }
     
         return importDeclaration

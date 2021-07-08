@@ -79,7 +79,7 @@ describe(".api tests", () => {
     
         test(".add form input", () => {
             const filePath = 'src/codegen/tests/detail/detail-test-file.txt';
-            const source : SourceLineCol = {lineNumber: 69, columnNumber:17, fileName:filePath};
+            const source : SourceLineCol = {lineNumber: 50, columnNumber:19, fileName:filePath};
     
             // TODO:PC: Expected result: 
             // - added property "test2" to initialValues

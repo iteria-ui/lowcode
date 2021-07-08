@@ -5,7 +5,7 @@ import {
   getAstAndNodeFromSource,
 } from "../ast/find"
 import { isInsideMapPatternFunction } from "../functions/maps"
-import { addElementsToAST } from "../ast/transformer"
+import { addJsxElementsToAST } from "../ast/transformer"
 
 export const addCodeSnippet = (
   code: string,
@@ -62,6 +62,6 @@ export const cloneElementInAst = (code: string, source: SourceLineCol) => {
   // If node is parenthesized expression, strip parentheses so cloned node won't be wrapped in them
   const finalNode = ts.isParenthesizedExpression(node) ? node.expression : node
 
-  const alteredAst = addElementsToAST(ast, finalNode.pos, [finalNode])
+  const alteredAst = addJsxElementsToAST(ast, finalNode.pos, [finalNode])
   return alteredAst
 }

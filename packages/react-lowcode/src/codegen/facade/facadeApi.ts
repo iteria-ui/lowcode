@@ -11,10 +11,10 @@ import MuiDataTableGenerator from "../generation/generators/list/mui-datatable-g
 import MuiDetailGenerator from "../generation/generators/detail/mui-detail-generator";
 import GrommetDataTableGenerator from "../generation/generators/list/grommet-dt-generator";
 import { CodeRW } from "../../io";
-import { CodegenRw } from "../io/codegenRw";
 import { BasicTableGenerator } from "../generation/generators/list/basic-table-generator";
-import { FacadeDeleteOptions, FacadeInsertOptions, RouteOptions } from "./interfaces";
+import { FacadeDeleteOptions, FacadeInsertOptions, MenuItemOptions, RouteOptions } from "./interfaces";
 import { ColumnSourcePositionResult, WidgetProperties } from "../interfaces";
+import { generateNewRoute } from "../generation/generators/routes/route-generator";
 
 export async function insertColumn(
   tablePosition: SourceLineCol,
@@ -149,7 +149,7 @@ export async function insertColumnToBasicTableGrommet(
 export async function insertFormWidget(
   formPosition: SourceLineCol,
   options: FacadeInsertOptions,
-  io: CodegenRw
+  io: CodeRW
 ): Promise<string> {
   let generationContext = {
     uiFramework: UiFramework.MaterialUI,
@@ -200,7 +200,7 @@ export async function getColumnSourcePosition(
 
 export async function getFormWidgetProperties(
   position: SourceLineCol,
-  io: CodegenRw
+  io: CodeRW
 ): Promise<WidgetProperties> {
   let generationContext = {
     uiFramework: UiFramework.MaterialUI,
@@ -225,7 +225,7 @@ export async function getFormWidgetProperties(
 
 export async function setFormWidgetProperties(
   position: SourceLineCol,
-  io: CodegenRw,
+  io: CodeRW,
   properties: WidgetProperties
 ): Promise<string | undefined> {
   let generationContext = {
@@ -249,6 +249,16 @@ export async function setFormWidgetProperties(
   return await generator.setFormWidgetProperties(position, properties);
 }
 
-export async function addRoute(options: RouteOptions) {
-    
+export async function generateRoute(options: RouteOptions, io: CodeRW): Promise<string | undefined> {
+  const routesDefinitionSource = await io.readFile(options.routeFilePath)
+
+  if(routesDefinitionSource){
+    return generateNewRoute(routesDefinitionSource, 
+                            options.componentRouteUri, 
+                            options.componentName, 
+                            options.componentFilePath
+            )
+  }
 }
+
+//export async function generateNewMenuItem(options: MenuItemOptions, io: CodeRW)

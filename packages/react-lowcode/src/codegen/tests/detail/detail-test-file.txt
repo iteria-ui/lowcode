@@ -9,8 +9,8 @@ import {
   Grid
 } from '@material-ui/core';
 import { useFormik } from 'formik';
-import { ICustomer } from './types';
-export var GeneratedCustomerDetail: React.FC<ICustomer> = customer => {
+import { Customer } from './Customer';
+export var FormikComponent: React.FC<Customer> = customer => {
   const intl = useIntl();
   const formik = useFormik({
     initialValues: {
@@ -22,7 +22,7 @@ export var GeneratedCustomerDetail: React.FC<ICustomer> = customer => {
       updatedAt: customer.updatedAt,
       test2: customer.test2
     },
-    onSubmit: values => { }
+    onSubmit: values => {}
   });
   {
     const intl = useIntl();
@@ -79,9 +79,6 @@ export var GeneratedCustomerDetail: React.FC<ICustomer> = customer => {
                 <Grid item md={6} xs={12}>
                   <TextField
                     fullWidth
-                    required={true}
-                    disabled={false}
-                    rows={10}
                     id="updatedAt"
                     type="date"
                     label="updatedAt"
