@@ -1,9 +1,9 @@
 {
-    "name": "vscode-json-editor",
-    "displayName": "JSON Tree Editor",
-    "description": "Generate a tree view editor of the active JSON document",
-    "version": "1.0.200602",
-    "publisher": "GregChamblin",
+    "name": "iteria-json-editor",
+    "displayName": "Iteria Json editor",
+    "description": "Generate a table view editor of the active JSON document",
+    "version": "1.0.0",
+    "publisher": "MartinBilansky",
     "engines": {
         "vscode": "^1.32.0"
     },
@@ -11,61 +11,44 @@
     "categories": [
         "Other"
     ],
-    "homepage": "https://github.com/gregchamblin/vscode-json-editor",
+    "homepage": "https://github.com/iteria-app/lowcode/tree/master/packages/vscode",
     "keywords": [
         "json",
         "editor",
-        "tree",
+        "table",
         "preview"
     ],
     "activationEvents": [
-        "onLanguage:json",
-        "onCommand:vscode-json-editor.start"
+        "onView:jsonEditor"
     ],
     "main": "./out/src/extension",
     "repository": {
         "type": "git",
-        "url": "https://github.com/gregchamblin/vscode-json-editor.git"
+        "url": "https://github.com/iteria-app/lowcode/tree/master/packages/vscode"
     },
     "contributes": {
-        "commands": [
-            {
-                "command": "vscode-json-editor.start5",
-                "title": "Start JSON Tree Editor session",
-                "category": "JSON Tree Editor",
-                "icon": {
-                    "light": "./resources/json-light.svg",
-                    "dark": "./resources/json-dark.svg"
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "jsonEditor-view",
+                    "title": "JsonEditor",
+                    "icon": "resources/json-dark.svg"
                 }
-            },
-            {
-                "command": "vscode-json-editor.start",
-                "title": "Edit Page"
-            }
-        ],
-        "menus": {
-            "explorer/context": [
+            ]
+        },
+        "views": {
+            "jsonEditor-view": [
                 {
-                    "when": "resourceExtname == .json",
-                    "command": "vscode-json-editor.start",
-                    "group": "navigation"
-                }
-            ],
-            "editor/title": [
-                {
-                    "when": "editorLangId == json",
-                    "command": "vscode-json-editor.start",
-                    "group": "navigation"
-                },
-                {
-                    "when": "editorLangId == svelte",
-                    "command": "vscode-json-editor.start",
-                    "group": "navigation"
+                    "type": "webview",
+                    "id": "jsonEditor",
+                    "name": "JsonEditor",
+                    "icon": "resources/json-dark.svg",
+                    "contextualTitle": "JsonEditor"
                 }
             ]
         },
         "configuration": {
-            "title": "JSON Tree Editor",
+            "title": "Iteria Json editor",
             "properties": {
                 "vscode-json-editor.theme": {
                     "type": "string",
@@ -86,19 +69,20 @@
         "deploy": "vsce publish --yarn"
     },
     "devDependencies": {
-        "@types/mocha": "^2.2.42",
-        "@types/node": "^7.0.43",
+        "@types/mocha": "^8.2.2",
+        "@types/glob": "^7.1.3",
+        "@types/node": "14.x",
         "@types/vscode": "^1.32.0",
         "aqua": "^1.0.1",
         "lerna": "^3.22.1",
         "prettier-plugin-svelte": "^1.1.0",
         "tslint": "^5.8.0",
         "tslint-microsoft-contrib": "^5.0.3",
-        "typescript": "^2.6.1",
+        "typescript": "^4.3.2",
         "vsce": "^1.75.0"
     },
     "dependencies": {
-        "prettier": "git+https://github.com/prettier/prettier.git#2.0.5",
+        "path": "^0.12.7",
         "svelte": "^3.24.1"
     }
 }

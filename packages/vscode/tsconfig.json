@@ -1,10 +1,10 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es2016",
+        "target": "es6",
         "outDir": "out",
         "lib": [
-            "es2016"
+            "es6"
         ],
         "sourceMap": true,
         "rootDir": ".",
@@ -12,7 +12,8 @@
         "noImplicitThis": true,
         "noImplicitReturns": true,
         "strictNullChecks": false,
-        "noUnusedParameters": true
+        "noUnusedParameters": true,
+        "skipLibCheck": true
     },
     "exclude": [
         "node_modules",
