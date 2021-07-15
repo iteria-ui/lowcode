@@ -39,11 +39,17 @@ export interface ColumnSourcePositionResult {
 
 export interface WidgetProperty {
     name: string,
-    value: string
+    value: string,
+    type: WidgetPropertyValue
 }
 
 export interface WidgetProperties {
     properties: WidgetProperty[]
+}
+
+export enum WidgetPropertyValue {
+    "EXPRESSION" = "EXPRESSION",
+    "STRING_LITERAL" = "STRING_LITERAL"
 }
 
 interface ThemeCodegen {

@@ -27,7 +27,7 @@ import {
   findPropertyAssignment,
 } from "../../../ast/ast";
 import { findWidgetParentNode, getWidgetProperties } from "../../../ast/widgetDeclaration";
-import { WidgetProperties } from "../../../interfaces";
+import { WidgetProperties, WidgetProperty } from "../../../interfaces";
 
 export default class MuiDetailGenerator implements DetailGenerator {
   private _imports: ts.ImportDeclaration[] = [];
@@ -129,7 +129,7 @@ export default class MuiDetailGenerator implements DetailGenerator {
                           }
                         }
 
-                        if (ts.isNumericLiteral(prop.initializer.expression)) {
+                        else if (ts.isNumericLiteral(prop.initializer.expression)) {
                           if (inputProp.value !== prop.initializer.expression.getText()) {
                             const numericValue = factory.createJsxExpression(
                               undefined,
@@ -139,6 +139,27 @@ export default class MuiDetailGenerator implements DetailGenerator {
                             newProp = factory.updateJsxAttribute(prop, prop.name, numericValue);
                             astChanged = true;
                           }
+                        }
+                        // intl.formatMessage({ id: formik.values.message }) || formik.handleChange || { shrink: true } || randomtext
+                        else if (inputProp.value !== prop.initializer.expression.getText()) {
+                            const newAst = createAst(inputProp.value)
+                            const statement = newAst?.statements[0] as any
+                            let value
+                          
+                            if (statement?.kind == SyntaxKind.ExpressionStatement) {
+                              value = factory.createJsxExpression(
+                                  undefined,
+                                  statement.expression
+                              )
+                            } else if (statement.kind == SyntaxKind.Block) {
+                              value = factory.createJsxExpression(
+                                undefined,
+                                factory.createIdentifier(statement.getText())
+                              )
+                            }
+                            
+                            newProp = factory.updateJsxAttribute(prop, prop.name, value)
+                            astChanged = true
                         }
                       }
                     }
